@@ -1,0 +1,22 @@
+name: CI
+
+on:
+  push:
+    branches: [ master, main ]
+  pull_request:
+    branches: [ master, main ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/checkout@v4
+        with:
+          repository: DirkTheDaring/naust-types
+          path: naust-types
+      - uses: dtolnay/rust-toolchain@stable
+      - run: cargo test --all-targets
+        working-directory: naust-auth
+      - run: cargo clippy --all-targets -- -D warnings
+        working-directory: naust-auth
