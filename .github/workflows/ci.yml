@@ -11,10 +11,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/checkout@v4
-        with:
-          repository: DirkTheDaring/naust-types
-          path: ../naust-types
+      - name: Stage sibling path dependency
+        run: git clone --depth 1 https://github.com/DirkTheDaring/naust-types ../naust-types
       - uses: dtolnay/rust-toolchain@stable
         with:
           components: rustfmt, clippy
